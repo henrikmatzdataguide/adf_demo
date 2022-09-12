@@ -1,0 +1,59 @@
+{
+    "name": "dataflow",
+    "properties": {
+        "type": "MappingDataFlow",
+        "typeProperties": {
+            "sources": [
+                {
+                    "dataset": {
+                        "referenceName": "source_csv_tabular_separeted",
+                        "type": "DatasetReference"
+                    },
+                    "name": "sourcefile"
+                }
+            ],
+            "sinks": [
+                {
+                    "dataset": {
+                        "referenceName": "target_azure_sql_db",
+                        "type": "DatasetReference"
+                    },
+                    "name": "sinkdatabase"
+                }
+            ],
+            "transformations": [
+                {
+                    "name": "addcolumn"
+                }
+            ],
+            "scriptLines": [
+                "source(output(",
+                "          id as integer,",
+                "          name as string",
+                "     ),",
+                "     allowSchemaDrift: true,",
+                "     validateSchema: false,",
+                "     inferDriftedColumnTypes: true,",
+                "     ignoreNoFilesFound: false,",
+                "     multiLineRow: true,",
+                "     dateFormats: ['yyyy-MM-dd'],",
+                "     timestampFormats: ['yyyy-MM-dd\\'T\\'HH:mm:ss'],",
+                "     preferredIntegralType: 'integer',",
+                "     preferredFractionalType: 'decimal',",
+                "     booleanFormat: ['true', 'false']) ~> sourcefile",
+                "sourcefile derive(id = id*2) ~> addcolumn",
+                "addcolumn sink(allowSchemaDrift: true,",
+                "     validateSchema: false,",
+                "     deletable:false,",
+                "     insertable:true,",
+                "     updateable:false,",
+                "     upsertable:false,",
+                "     truncate:true,",
+                "     format: 'table',",
+                "     skipDuplicateMapInputs: true,",
+                "     skipDuplicateMapOutputs: true,",
+                "     errorHandlingOption: 'stopOnFirstError') ~> sinkdatabase"
+            ]
+        }
+    }
+}

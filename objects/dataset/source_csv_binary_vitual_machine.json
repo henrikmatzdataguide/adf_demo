@@ -1,0 +1,21 @@
+{
+    "name": "source_csv_binary_vitual_machine",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "IntegrationRuntime_File_Folder",
+            "type": "LinkedServiceReference"
+        },
+        "folder": {
+            "name": "source"
+        },
+        "annotations": [],
+        "type": "Binary",
+        "typeProperties": {
+            "location": {
+                "type": "FileServerLocation",
+                "fileName": "csv_tabular_separeted.csv"
+            }
+        }
+    },
+    "type": "Microsoft.DataFactory/factories/datasets"
+}

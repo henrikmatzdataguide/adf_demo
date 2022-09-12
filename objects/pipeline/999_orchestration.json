@@ -1,0 +1,65 @@
+{
+    "name": "999_orchestration",
+    "properties": {
+        "activities": [
+            {
+                "name": "001",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "001_copy_file_csv",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "002",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "002_copy_file_xml_copy",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "003",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "001",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    },
+                    {
+                        "activity": "002",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "003_convert_file_csv_to_json",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            }
+        ],
+        "folder": {
+            "name": "Examples"
+        },
+        "annotations": [],
+        "lastPublishTime": "2022-09-12T07:58:36Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

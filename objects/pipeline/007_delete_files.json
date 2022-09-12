@@ -1,0 +1,39 @@
+{
+    "name": "007_delete_files",
+    "properties": {
+        "activities": [
+            {
+                "name": "Delete all files in target folders",
+                "type": "Delete",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.01:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataset": {
+                        "referenceName": "target_all",
+                        "type": "DatasetReference"
+                    },
+                    "enableLogging": false,
+                    "storeSettings": {
+                        "type": "AzureBlobFSReadSettings",
+                        "recursive": true,
+                        "wildcardFileName": "*",
+                        "enablePartitionDiscovery": false
+                    }
+                }
+            }
+        ],
+        "folder": {
+            "name": "Examples"
+        },
+        "annotations": [],
+        "lastPublishTime": "2022-09-12T07:58:35Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,22 @@
+{
+    "name": "source_xml",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "AzureDataLakeStorage",
+            "type": "LinkedServiceReference"
+        },
+        "folder": {
+            "name": "source"
+        },
+        "annotations": [],
+        "type": "Xml",
+        "typeProperties": {
+            "location": {
+                "type": "AzureBlobFSLocation",
+                "fileName": "example.xml",
+                "fileSystem": "source"
+            }
+        }
+    },
+    "type": "Microsoft.DataFactory/factories/datasets"
+}

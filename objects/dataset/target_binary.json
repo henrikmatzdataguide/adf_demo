@@ -1,0 +1,21 @@
+{
+    "name": "target_binary",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "AzureDataLakeStorage",
+            "type": "LinkedServiceReference"
+        },
+        "folder": {
+            "name": "target"
+        },
+        "annotations": [],
+        "type": "Binary",
+        "typeProperties": {
+            "location": {
+                "type": "AzureBlobFSLocation",
+                "fileSystem": "target"
+            }
+        }
+    },
+    "type": "Microsoft.DataFactory/factories/datasets"
+}

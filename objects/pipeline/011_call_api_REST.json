@@ -1,0 +1,82 @@
+{
+    "name": "011_call_api_REST",
+    "properties": {
+        "activities": [
+            {
+                "name": "Scale database up",
+                "type": "WebActivity",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.01:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "url": "https://management.azure.com/subscriptions/af6337a9-ca97-4036-a3f8-179c98223aba/resourceGroups/invixo_demo_and_training/providers/Microsoft.Sql/servers/invixodemo/databases/invixo-demo?api-version=2017-10-01-preview",
+                    "method": "PUT",
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": {
+                        "sku": {
+                            "name": "S1",
+                            "tier": "Standard"
+                        },
+                        "location": "westeurope"
+                    },
+                    "authentication": {
+                        "type": "MSI",
+                        "resource": "https://management.azure.com/"
+                    }
+                }
+            },
+            {
+                "name": "Scale database down",
+                "type": "WebActivity",
+                "dependsOn": [
+                    {
+                        "activity": "Scale database up",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.01:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "url": "https://management.azure.com/subscriptions/af6337a9-ca97-4036-a3f8-179c98223aba/resourceGroups/invixo_demo_and_training/providers/Microsoft.Sql/servers/invixodemo/databases/invixo-demo?api-version=2017-10-01-preview",
+                    "method": "PUT",
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": {
+                        "sku": {
+                            "name": "Basic",
+                            "tier": "Basic"
+                        },
+                        "location": "westeurope"
+                    },
+                    "authentication": {
+                        "type": "MSI",
+                        "resource": "https://management.azure.com/"
+                    }
+                }
+            }
+        ],
+        "folder": {
+            "name": "Examples"
+        },
+        "annotations": [],
+        "lastPublishTime": "2022-09-12T07:58:34Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

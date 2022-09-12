@@ -1,0 +1,30 @@
+{
+    "name": "010_call_api_http_request",
+    "properties": {
+        "activities": [
+            {
+                "name": "Web request",
+                "type": "WebActivity",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.01:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "url": "https://api.coindesk.com/v1/bpi/currentprice.json",
+                    "method": "GET"
+                }
+            }
+        ],
+        "folder": {
+            "name": "Examples"
+        },
+        "annotations": [],
+        "lastPublishTime": "2022-09-12T07:58:34Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}
