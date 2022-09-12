@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "invixo-demo-github"
+		},
+		"AzureDataLakeStorage_accountKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase_connectionString": {
+			"value": ""
+		},
+		"IntegrationRuntime_File_Folder_password": {
+			"value": ""
+		},
+		"AzureDataLakeStorage_properties_typeProperties_url": {
+			"value": "https://invixodemo.dfs.core.windows.net/"
+		},
+		"IntegrationRuntime_File_Folder_properties_typeProperties_host": {
+			"value": "C:\\Data"
+		},
+		"IntegrationRuntime_File_Folder_properties_typeProperties_userId": {
+			"value": "myadmin"
+		}
+	}
+}
