@@ -1,0 +1,53 @@
+{
+	"name": "014_logging",
+	"properties": {
+		"activities": [
+			{
+				"name": "logging",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.00:02:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[logProcedure]",
+					"storedProcedureParameters": {
+						"runId": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"targetFileName": {
+							"value": {
+								"value": "@pipeline().parameters.targetFileName",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"parameters": {
+			"targetFileName": {
+				"type": "string",
+				"defaultValue": "myFile.txt"
+			}
+		},
+		"folder": {
+			"name": "Examples"
+		},
+		"annotations": []
+	}
+}
